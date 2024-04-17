@@ -40,4 +40,19 @@ class HomeScreenController with ChangeNotifier {
     isloading = false;
     notifyListeners();
   }
+
+  Future Addemployee(var id) async {
+    isloading = true;
+    notifyListeners();
+
+    Uri url = Uri.parse(baseurl + "/employees/create/");
+
+    var res = await http.post(url, body: {"name": "sdd", "role": "flutter"});
+
+    if (res.statusCode >= 200 && res.statusCode < 300) {
+      await getEmployee();
+    }
+    isloading = false;
+    notifyListeners();
+  }
 }

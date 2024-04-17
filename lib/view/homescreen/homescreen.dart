@@ -48,12 +48,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    TextButton(onPressed: () {}, child: Text("edit")),
-                    TextButton(onPressed: () {}, child: Text("delete")),
+                    TextButton(
+                        onPressed: () async {
+                          await context
+                              .read<HomeScreenController>()
+                              .getEmployee();
+                        },
+                        child: Text("Add")),
+                    TextButton(onPressed: () {}, child: Text("Edit")),
                   ],
                 ),
                 Center(
                   child: ListView.separated(
+                    physics: NeverScrollableScrollPhysics(),
                     itemCount: Provider.employeeslist?.length ?? 0,
                     separatorBuilder: (context, index) => SizedBox(
                       height: 20,
